@@ -1,0 +1,142 @@
+﻿@using Speaker.leison.Sistem.layer.Repositories
+@model List<ExcellDataMode3l>
+
+@{
+    Layout = null;
+    UdpComunicationRepository udp=new UdpComunicationRepository();
+    // Assuming IUdpComunicationRepository is injected through DI in HomeController
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<script>
+    function refreshPage() {
+        location.reload();
+    }
+
+    setInterval(refreshPage, 90000);
+</script>
+   
+    
+
+<style>
+    /* CustomStyles.css */
+    html, body {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #f1f8e4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 30px;
+        max-width: 1700px;
+        width: 100%;
+    }
+
+    .cardi {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 15px;
+        margin: 10px;
+        flex: 0 1 calc(30% - 5px);
+        border: 1px solid #ddd;
+        background-color: #ffffff;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+
+        .cardi:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-header {
+        border-bottom: 2px solid #4caf50;
+        border-radius: 15px 15px 0 0;
+        background-color: #8bc34a;
+        color: white;
+        padding: 10px;
+    }
+
+    .card-title {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin: 0;
+        color: #d32f2f;
+    }
+
+    .card-body {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-grow: 1;
+    }
+
+    .card-text {
+        font-size: 1.1rem;
+        color: #1976d2;
+        margin: 5px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-subtitle {
+        font-size: 1.1rem;
+        color: #fbc02d;
+        margin: 5px 0;
+    }
+</style>
+
+<body>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="cardi">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-briefcase" style="color: #d32f2f; font-size: 20px; margin-right: 5px;"></i>
+                        <strong style="font-size:35px;">საქმე:</strong>
+                        <span style="font-size:25px;color:white">@item.job</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-subtitle" style="font-size:28px">
+                        <i class="fas fa-tv" style="color: #d32f2f; font-size: 20px; margin-right: 5px;"></i>
+                        <strong>არხის სახელი:</strong> @item.ChanellName
+                    </h6>
+                    <p class="card-text" style="font-size:26px">
+                        <i class="fas fa-calendar-alt" style="color: #d32f2f; font-size: 20px; margin-right: 5px;"></i>
+                        <strong style="color: #d32f2f;">თარიღი:</strong> @item.Date
+                    </p>
+                    <p class="card-text" style="font-size:26px">
+                        <i class="fas fa-clock" style="color: #d32f2f; font-size: 20px; margin-right: 5px;"></i>
+                        <strong style="color: #d32f2f;">დრო:</strong> @item.endtime
+                    </p>
+                    <p class="card-text" style="font-size:26px">
+                        <i class="fas fa-user-check" style="color: #d32f2f; font-size: 20px; margin-right: 5px;"></i>
+                        <strong style="color: #d32f2f;">მორიგე:</strong> @item.OnDuty
+                    </p>
+                    <p class="card-text" style="font-size:26px">
+                        <i class="fas fa-info-circle" style="color: #d32f2f; font-size: 20px; margin-right: 5px;"></i>
+                        <strong style="color: #d32f2f;">შენიშვნა:</strong> @item.AdditionInfo
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</body>
